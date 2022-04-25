@@ -42,6 +42,7 @@
 import Vue from "vue";
 import { IStudent } from "@/types";
 import { AxiosResponse } from "axios";
+import axios from "@/plugins/axios";
 
 interface IEditStudentViewData {
   student: IStudent;
@@ -57,7 +58,7 @@ export default Vue.extend({
   },
 
   created() {
-    this.$axios
+    axios
       .get(`/edit-student/${this.$route.params.id}`)
       .then((res: AxiosResponse<IStudent>) => {
         this.student = res.data;
@@ -66,7 +67,7 @@ export default Vue.extend({
 
   methods: {
     handleUpdateForm() {
-      this.$axios
+      axios
         .put(`/update-student/${this.$route.params.id}`, this.student)
         .then(() => this.$router.push("/view"))
         .catch((error: string) => {

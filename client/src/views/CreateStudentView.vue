@@ -49,6 +49,7 @@
 import Vue from "vue";
 import Student from "@/models/Student";
 import { IStudent } from "@/types";
+import axios from "@/plugins/axios";
 
 interface ICreateStudentViewData {
   student: IStudent;
@@ -65,7 +66,7 @@ export default Vue.extend({
 
   methods: {
     handleSubmitForm() {
-      this.$axios
+      axios
         .post("/create-student", this.student)
         .then(() => {
           this.$router.push("/view");

@@ -38,6 +38,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { IStudent } from "@/types";
+import axios from "@/plugins/axios";
 
 interface IListOfStudentsViewData {
   students: IStudent[];
@@ -53,7 +54,7 @@ export default Vue.extend({
   },
 
   created() {
-    this.$axios
+    axios
       .get("/")
       .then((res) => {
         this.students = res.data;
@@ -70,7 +71,7 @@ export default Vue.extend({
       );
 
       if (window.confirm("Do you really want to delete?")) {
-        this.$axios
+        axios
           .delete(`/delete-student/${studentId}`)
           .then(() => {
             this.students.splice(indexOfArrayItem, 1);
