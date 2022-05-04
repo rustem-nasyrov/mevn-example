@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div class="col-md-12">
-      <table class="table table-striped">
+    <v-simple-table>
+      <template v-slot:default>
         <thead class="thead-dark">
           <tr>
             <th>Name</th>
@@ -17,21 +17,21 @@
             <td>{{ student.phone }}</td>
             <td>
               <router-link
+                custom
+                v-slot="{ navigate }"
                 :to="{ name: 'edit', params: { id: student._id } }"
                 class="btn btn-success"
-                >Edit
-              </router-link>
-              <button
-                @click.prevent="deleteStudent(student._id)"
-                class="btn btn-danger"
               >
+                <v-btn color="primary" @click="navigate">Edit</v-btn>
+              </router-link>
+              <v-btn color="error" @click.prevent="deleteStudent(student._id)">
                 Delete
-              </button>
+              </v-btn>
             </td>
           </tr>
         </tbody>
-      </table>
-    </div>
+      </template>
+    </v-simple-table>
   </div>
 </template>
 
