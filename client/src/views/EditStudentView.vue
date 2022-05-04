@@ -1,11 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <v-form @submit.prevent="handleUpdateForm">
-      <v-text-field
-        v-model="student.name"
-        label="Name"
-        placeholder="John Doe"
-      >
+      <v-text-field v-model="student.name" label="Name" placeholder="John Doe">
       </v-text-field>
       <v-text-field
         v-model="student.email"
