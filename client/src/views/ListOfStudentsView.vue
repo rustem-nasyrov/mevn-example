@@ -32,6 +32,17 @@
         </tbody>
       </template>
     </v-simple-table>
+
+    <v-snackbar
+      :value="showNotification"
+      :timeout="2000"
+      color="success"
+      absolute
+      right
+      top
+    >
+      Successfully updated
+    </v-snackbar>
   </div>
 </template>
 
@@ -42,6 +53,7 @@ import axios from "@/plugins/axios";
 
 interface IListOfStudentsViewData {
   students: IStudent[];
+  showNotification: boolean;
 }
 
 export default Vue.extend({
@@ -50,6 +62,7 @@ export default Vue.extend({
   data(): IListOfStudentsViewData {
     return {
       students: [],
+      showNotification: false,
     };
   },
 
@@ -62,6 +75,14 @@ export default Vue.extend({
       .catch((error: string) => {
         throw new Error(error);
       });
+  },
+
+  beforeRouteEnter: (to, from, next) => {
+    next((component: any) => {
+      if (from.name?.toLowerCase().includes("edit")) {
+        component.showNotification = !component.showNotification;
+      }
+    });
   },
 
   methods: {
